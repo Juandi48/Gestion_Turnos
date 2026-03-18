@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Calendario de Turnos</h2>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora inicio</th>
+                <th>Hora fin</th>
+                <th>Docente</th>
+                <th>Zona</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="turno : ${turnos}">
+                <td th:text="${turno.fecha}"></td>
+                <td th:text="${turno.horaInicio}"></td>
+                <td th:text="${turno.horaFin}"></td>
+                <td th:text="${turno.docente != null ? turno.docente.nombreCompleto : 'Sin docente'}"></td>
+                <td th:text="${turno.zona != null ? turno.zona.nombre : 'Sin zona'}"></td>
+                <td th:text="${turno.estado != null ? turno.estado.etiqueta : 'Sin estado'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

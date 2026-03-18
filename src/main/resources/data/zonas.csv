@@ -1,0 +1,11 @@
+nombre,descripcion,bloque,activa
+Patio Central,Zona principal de circulación de estudiantes,A,true
+Biblioteca,Acceso y alrededores de la biblioteca central,B,true
+Laboratorios,Corredor externo de laboratorios de ingeniería,C,true
+Cafeteria,Área de comidas y mesas comunes,D,true
+Entrada Principal,Acceso principal al campus,E,true
+Canchas,Zona deportiva y graderías,F,true
+Pasillo Administrativo,Corredor frente a oficinas administrativas,G,true
+Auditorio,Área externa e ingreso al auditorio,H,true
+Parqueadero,Acceso peatonal y vehicular del parqueadero,I,true
+Capilla,Entorno cercano a la capilla universitaria,J,true

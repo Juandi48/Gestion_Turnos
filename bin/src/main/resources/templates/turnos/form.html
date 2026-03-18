@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Formulario Turno</h2>
+
+    <div class="form-container">
+        <form th:action="@{/turnos/guardar}" th:object="${turno}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" th:field="*{fecha}">
+            </div>
+
+            <div class="form-group">
+                <label>Hora inicio</label>
+                <input type="time" th:field="*{horaInicio}">
+            </div>
+
+            <div class="form-group">
+                <label>Hora fin</label>
+                <input type="time" th:field="*{horaFin}">
+            </div>
+
+            <div class="form-group">
+                <label>Docente</label>
+                <select th:field="*{docente}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="docente : ${docentes}"
+                            th:value="${docente.id}"
+                            th:text="${docente.nombreCompleto}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Zona</label>
+                <select th:field="*{zona}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="zona : ${zonas}"
+                            th:value="${zona.id}"
+                            th:text="${zona.nombre}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option th:each="estado : ${T(edu.javeriana.gestionturnos.enums.EstadoTurno).values()}"
+                            th:value="${estado}"
+                            th:text="${estado.etiqueta}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-primary" th:href="@{/turnos}">Volver</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

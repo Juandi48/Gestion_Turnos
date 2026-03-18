@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(titulo)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${titulo} ?: 'Gestión de Turnos'">Gestión de Turnos</title>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/forms.css}">
+    <link rel="stylesheet" th:href="@{/css/tables.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+
+    <script th:src="@{/js/confirmaciones.js}" defer></script>
+    <script th:src="@{/js/filtros.js}" defer></script>
+    <script th:src="@{/js/calendario.js}" defer></script>
+</head>
+</html>

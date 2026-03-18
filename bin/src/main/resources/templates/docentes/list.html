@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Listado de Docentes</h2>
+
+    <div class="table-container">
+        <a class="btn btn-primary" th:href="@{/docentes/nuevo}">Nuevo docente</a>
+        <br><br>
+
+        <input id="buscadorDocentes" type="text" placeholder="Buscar..."
+               onkeyup="filtrarTabla('buscadorDocentes','tablaDocentes')">
+
+        <table id="tablaDocentes">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Activo</th>
+                <th>Carga turnos</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="docente : ${docentes}">
+                <td th:text="${docente.id}"></td>
+                <td th:text="${docente.nombreCompleto}"></td>
+                <td th:text="${docente.correo}"></td>
+                <td th:text="${docente.activo ? 'Sí' : 'No'}"></td>
+                <td th:text="${docente.cargaTurnos}"></td>
+                <td class="actions">
+                    <a class="btn btn-success" th:href="@{'/docentes/detalle/' + ${docente.id}}">Ver</a>
+                    <a class="btn btn-primary" th:href="@{'/docentes/editar/' + ${docente.id}}">Editar</a>
+                    <a class="btn btn-danger"
+                       th:href="@{'/docentes/eliminar/' + ${docente.id}}"
+                       onclick="return confirmarEliminar();">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

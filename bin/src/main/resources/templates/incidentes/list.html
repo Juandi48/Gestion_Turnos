@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Listado de Incidentes</h2>
+
+    <div class="table-container">
+        <a class="btn btn-primary" th:href="@{/incidentes/nuevo}">Registrar incidente</a>
+        <br><br>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha/Hora</th>
+                <th>Tipo</th>
+                <th>Severidad</th>
+                <th>Zona</th>
+                <th>Docente</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="incidente : ${incidentes}">
+                <td th:text="${incidente.id}"></td>
+                <td th:text="${incidente.fechaHora}"></td>
+                <td th:text="${incidente.tipoIncidente != null ? incidente.tipoIncidente.descripcion : 'Sin tipo'}"></td>
+                <td th:text="${incidente.severidad != null ? incidente.severidad.descripcion : 'Sin severidad'}"></td>
+                <td th:text="${incidente.zona != null ? incidente.zona.nombre : 'Sin zona'}"></td>
+                <td th:text="${incidente.docenteReporta != null ? incidente.docenteReporta.nombreCompleto : 'Sin docente'}"></td>
+                <td class="actions">
+                    <a class="btn btn-success" th:href="@{'/incidentes/detalle/' + ${incidente.id}}">Ver</a>
+                    <a class="btn btn-primary" th:href="@{'/incidentes/editar/' + ${incidente.id}}">Editar</a>
+                    <a class="btn btn-danger"
+                       th:href="@{'/incidentes/eliminar/' + ${incidente.id}}"
+                       onclick="return confirmarEliminar();">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

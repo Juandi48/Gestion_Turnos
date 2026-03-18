@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Dashboard</h2>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <h3>Incidentes por zona</h3>
+            <div th:each="item : ${incidentesPorZona}">
+                <p>
+                    <span th:text="${item.nombreZona}"></span>:
+                    <strong th:text="${item.cantidadIncidentes}"></strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Turnos por estado</h3>
+            <div th:each="item : ${turnosPorEstado}">
+                <p>
+                    <span th:text="${item.key}"></span>:
+                    <strong th:text="${item.value}"></strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Reemplazos por estado</h3>
+            <div th:each="item : ${reemplazosPorEstado}">
+                <p>
+                    <span th:text="${item.key}"></span>:
+                    <strong th:text="${item.value}"></strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

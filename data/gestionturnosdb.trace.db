@@ -1,0 +1,12 @@
+2026-03-17 09:32:13.445116-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "ROLES" no encontrada
+Table "ROLES" not found; SQL statement:
+MERGE INTO roles (nombre) KEY(nombre) VALUES ('ADMIN') [42102-224]
+2026-03-17 09:32:13.446618-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "ROLES" no encontrada
+Table "ROLES" not found; SQL statement:
+MERGE INTO roles (nombre) KEY(nombre) VALUES ('COORDINADOR') [42102-224]
+2026-03-17 09:32:13.446618-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "ROLES" no encontrada
+Table "ROLES" not found; SQL statement:
+MERGE INTO roles (nombre) KEY(nombre) VALUES ('DOCENTE') [42102-224]

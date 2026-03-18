@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Detalle Docente</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> <span th:text="${docente.id}"></span></p>
+        <p><strong>Nombre:</strong> <span th:text="${docente.nombreCompleto}"></span></p>
+        <p><strong>Correo:</strong> <span th:text="${docente.correo}"></span></p>
+        <p><strong>Activo:</strong> <span th:text="${docente.activo ? 'Sí' : 'No'}"></span></p>
+        <p><strong>Carga de turnos:</strong> <span th:text="${docente.cargaTurnos}"></span></p>
+        <a class="btn btn-primary" th:href="@{/docentes}">Volver</a>
+    </div>
+</main>
+</body>
+</html>

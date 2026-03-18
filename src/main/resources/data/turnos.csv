@@ -1,0 +1,16 @@
+fecha,horaInicio,horaFin,estado,correoDocente,nombreZona
+2026-10-10,08:00,10:00,PROGRAMADO,laura.gomez@javeriana.edu.co,Patio Central
+2026-10-10,08:00,10:00,PROGRAMADO,carlos.rojas@javeriana.edu.co,Biblioteca
+2026-10-10,10:00,12:00,PROGRAMADO,sofia.martinez@javeriana.edu.co,Laboratorios
+2026-10-10,10:00,12:00,PROGRAMADO,andres.lopez@javeriana.edu.co,Cafeteria
+2026-10-10,12:00,14:00,PROGRAMADO,paula.castro@javeriana.edu.co,Entrada Principal
+2026-10-10,12:00,14:00,PROGRAMADO,daniela.ramirez@javeriana.edu.co,Canchas
+2026-10-11,08:00,10:00,PENDIENTE,miguel.herrera@javeriana.edu.co,Pasillo Administrativo
+2026-10-11,08:00,10:00,PROGRAMADO,valentina.ortega@javeriana.edu.co,Auditorio
+2026-10-11,10:00,12:00,CUBIERTO,juan.parra@javeriana.edu.co,Parqueadero
+2026-10-11,10:00,12:00,PROGRAMADO,camila.suarez@javeriana.edu.co,Capilla
+2026-10-12,08:00,10:00,PROGRAMADO,laura.gomez@javeriana.edu.co,Biblioteca
+2026-10-12,10:00,12:00,PROGRAMADO,carlos.rojas@javeriana.edu.co,Patio Central
+2026-10-12,12:00,14:00,PENDIENTE,sofia.martinez@javeriana.edu.co,Cafeteria
+2026-10-12,14:00,16:00,PROGRAMADO,andres.lopez@javeriana.edu.co,Laboratorios
+2026-10-12,16:00,18:00,CANCELADO,paula.castro@javeriana.edu.co,Entrada Principal

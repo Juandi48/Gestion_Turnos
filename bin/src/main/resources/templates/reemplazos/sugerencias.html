@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Sugerencias de Reemplazo</h2>
+
+    <div class="card">
+        <p><strong>Turno:</strong> <span th:text="${turno.id}"></span></p>
+        <p><strong>Fecha:</strong> <span th:text="${turno.fecha}"></span></p>
+        <p><strong>Hora:</strong> <span th:text="${turno.horaInicio + ' - ' + turno.horaFin}"></span></p>
+        <p><strong>Zona:</strong> <span th:text="${turno.zona != null ? turno.zona.nombre : 'Sin zona'}"></span></p>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>ID docente</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Carga turnos</th>
+                <th>Disponible</th>
+                <th>Criterio</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="s : ${sugerencias}">
+                <td th:text="${s.docenteId}"></td>
+                <td th:text="${s.nombreCompletoDocente}"></td>
+                <td th:text="${s.correoDocente}"></td>
+                <td th:text="${s.cargaTurnos}"></td>
+                <td th:text="${s.disponible ? 'Sí' : 'No'}"></td>
+                <td th:text="${s.criterioSugerencia}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a class="btn btn-primary" th:href="@{/reemplazos}">Volver</a>
+</main>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Listado de Zonas</h2>
+
+    <div class="table-container">
+        <a class="btn btn-primary" th:href="@{/zonas/nuevo}">Nueva zona</a>
+        <br><br>
+
+        <table id="tablaZonas">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Bloque</th>
+                <th>Activa</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="zona : ${zonas}">
+                <td th:text="${zona.id}"></td>
+                <td th:text="${zona.nombre}"></td>
+                <td th:text="${zona.descripcion}"></td>
+                <td th:text="${zona.bloque}"></td>
+                <td th:text="${zona.activa ? 'Sí' : 'No'}"></td>
+                <td class="actions">
+                    <a class="btn btn-success" th:href="@{'/zonas/detalle/' + ${zona.id}}">Ver</a>
+                    <a class="btn btn-primary" th:href="@{'/zonas/editar/' + ${zona.id}}">Editar</a>
+                    <a class="btn btn-danger"
+                       th:href="@{'/zonas/eliminar/' + ${zona.id}}"
+                       onclick="return confirmarEliminar();">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

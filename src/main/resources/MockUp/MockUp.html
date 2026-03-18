@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mockup - Gestión de Turnos e Incidentes</title>
+  <style>
+    :root{
+      --bg:#f4f6fb;
+      --panel:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --primary:#1d4ed8;
+      --success:#16a34a;
+      --warning:#f59e0b;
+      --danger:#dc2626;
+      --sidebar:#111827;
+      --sidebar-2:#1f2937;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+    }
+
+    .app{
+      display:grid;
+      grid-template-columns:260px 1fr;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      background:linear-gradient(180deg,var(--sidebar-2),var(--sidebar));
+      color:#fff;
+      padding:24px 18px;
+      height:100vh;
+      position:sticky;
+      top:0;
+    }
+
+    .brand{
+      font-size:21px;
+      font-weight:700;
+      line-height:1.3;
+      margin-bottom:8px;
+    }
+
+    .brand small{
+      display:block;
+      font-size:12px;
+      font-weight:400;
+      color:#cbd5e1;
+      margin-top:6px;
+      line-height:1.5;
+    }
+
+    .nav-title{
+      margin:24px 0 10px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#94a3b8;
+    }
+
+    .nav-btn{
+      width:100%;
+      text-align:left;
+      border:0;
+      background:transparent;
+      color:#e5e7eb;
+      padding:12px 14px;
+      border-radius:12px;
+      margin-bottom:8px;
+      cursor:pointer;
+      transition:.2s ease;
+      font-size:14px;
+    }
+
+    .nav-btn:hover,
+    .nav-btn.active{
+      background:rgba(255,255,255,.1);
+      color:#fff;
+    }
+
+    .main{
+      padding:22px;
+    }
+
+    .topbar{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+      box-shadow:0 8px 30px rgba(15,23,42,.04);
+    }
+
+    .topbar h1{
+      margin:0;
+      font-size:22px;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      background:#dbeafe;
+      color:#1d4ed8;
+    }
+
+    .screen{display:none}
+    .screen.active{display:block}
+
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:20px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 8px 30px rgba(15,23,42,.04);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .metric{
+      font-size:32px;
+      font-weight:700;
+    }
+
+    .toolbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .toolbar h2{
+      margin:0;
+      font-size:22px;
+    }
+
+    .btn{
+      border:0;
+      padding:10px 14px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-success{background:var(--success);color:#fff}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-light{background:#eef2ff;color:#3730a3}
+
+    .table-wrap{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      overflow:auto;
+      box-shadow:0 8px 30px rgba(15,23,42,.04);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th,td{
+      padding:12px 10px;
+      border-bottom:1px solid var(--line);
+      text-align:left;
+      font-size:14px;
+    }
+
+    th{
+      background:#f8fafc;
+      color:#334155;
+    }
+
+    .pill{
+      display:inline-block;
+      border-radius:999px;
+      padding:5px 9px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .pill-ok{background:#dcfce7;color:#166534}
+    .pill-warn{background:#fef3c7;color:#92400e}
+    .pill-danger{background:#fee2e2;color:#991b1b}
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 8px 30px rgba(15,23,42,.04);
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:8px;
+      font-size:14px;
+      font-weight:700;
+      color:#374151;
+    }
+
+    .field input,.field select,.field textarea{
+      width:100%;
+      border:1px solid #d1d5db;
+      border-radius:10px;
+      padding:11px 12px;
+      font-size:14px;
+      background:#fff;
+    }
+
+    .field textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .full{grid-column:1 / -1}
+
+    .actions{
+      display:flex;
+      gap:10px;
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
+
+    .calendar{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+
+    .day-col{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      min-height:260px;
+    }
+
+    .day-col h4{
+      margin:0 0 12px;
+      font-size:14px;
+    }
+
+    .event{
+      background:#e0ecff;
+      border-left:4px solid var(--primary);
+      padding:10px;
+      border-radius:10px;
+      margin-bottom:10px;
+      font-size:13px;
+      line-height:1.4;
+    }
+
+    .legend{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:#374151;
+      background:#f9fafb;
+      border:1px solid #e5e7eb;
+      border-radius:999px;
+      padding:8px 12px;
+    }
+
+    .legend-color{
+      width:14px;
+      height:14px;
+      border-radius:50%;
+    }
+
+    .low{background:#86efac}
+    .medium{background:#fcd34d}
+    .high{background:#f87171}
+
+    .heatmap-container{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 8px 30px rgba(15,23,42,.04);
+    }
+
+    .heatmap-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:22px;
+    }
+
+    .heatmap-header h3{
+      margin:0;
+      font-size:24px;
+    }
+
+    .heatmap-header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .zones-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:18px;
+    }
+
+    .zone-card{
+      border-radius:16px;
+      padding:18px;
+      color:#111827;
+      border:1px solid #e5e7eb;
+      min-height:170px;
+      transition:transform .2s ease;
+    }
+
+    .zone-card:hover{
+      transform:translateY(-4px);
+    }
+
+    .zone-card.low{
+      background:linear-gradient(180deg,#dcfce7,#bbf7d0);
+    }
+
+    .zone-card.medium{
+      background:linear-gradient(180deg,#fef3c7,#fde68a);
+    }
+
+    .zone-card.high{
+      background:linear-gradient(180deg,#fee2e2,#fecaca);
+    }
+
+    .zone-name{
+      font-size:18px;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .zone-level{
+      display:inline-block;
+      font-size:12px;
+      font-weight:700;
+      border-radius:999px;
+      padding:6px 10px;
+      margin-bottom:16px;
+      background:rgba(255,255,255,0.65);
+    }
+
+    .zone-metric{
+      font-size:34px;
+      font-weight:700;
+      line-height:1;
+      margin-bottom:6px;
+    }
+
+    .zone-subtext{
+      font-size:14px;
+      color:#374151;
+      margin-bottom:14px;
+    }
+
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      font-size:12px;
+      margin-bottom:6px;
+      color:#374151;
+      font-weight:700;
+    }
+
+    .progress-bar{
+      width:100%;
+      height:12px;
+      background:rgba(255,255,255,0.55);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress-fill{
+      height:100%;
+      border-radius:999px;
+    }
+
+    .zone-card.low .progress-fill{background:#16a34a}
+    .zone-card.medium .progress-fill{background:#d97706}
+    .zone-card.high .progress-fill{background:#dc2626}
+
+    .footer-note{
+      margin-top:20px;
+      font-size:14px;
+      color:#6b7280;
+      line-height:1.6;
+    }
+
+    @media (max-width: 1100px){
+      .grid-4,.form-grid,.calendar{
+        grid-template-columns:1fr 1fr;
+      }
+      .app{
+        grid-template-columns:1fr;
+      }
+      .sidebar{
+        position:relative;
+        height:auto;
+      }
+    }
+
+    @media (max-width: 760px){
+      .grid-4,.form-grid,.calendar{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        Gestión de Turnos
+        <small>
+          Mockup.<br>
+          Proyecto Desarrollo Web - Javeriana
+        </small>
+      </div>
+
+      <div class="nav-title">Pantallas</div>
+      <button class="nav-btn active" data-screen="inicio">Inicio / Dashboard</button>
+      <button class="nav-btn" data-screen="docentes">Listado de docentes</button>
+      <button class="nav-btn" data-screen="turnos">Calendario de turnos</button>
+      <button class="nav-btn" data-screen="incidente">Registrar incidente</button>
+      <button class="nav-btn" data-screen="reemplazo">Sugerencia de reemplazo</button>
+      <button class="nav-btn" data-screen="heatmap">Mapa de calor</button>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1>Mockup del sistema</h1>
+          <div class="subtitle">
+            Versión visual del sistema sin funcionalidades.
+          </div>
+        </div>
+        <span class="badge">Demo HTML</span>
+      </div>
+
+      <section id="inicio" class="screen active">
+        <div class="grid-4">
+          <div class="card">
+            <h3>Docentes activos</h3>
+            <div class="metric">24</div>
+          </div>
+          <div class="card">
+            <h3>Turnos hoy</h3>
+            <div class="metric">18</div>
+          </div>
+          <div class="card">
+            <h3>Incidentes semana</h3>
+            <div class="metric">7</div>
+          </div>
+          <div class="card">
+            <h3>Reemplazos pendientes</h3>
+            <div class="metric">3</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="toolbar">
+            <h2>Resumen del sistema</h2>
+            <button class="btn btn-primary" type="button">Nuevo turno</button>
+          </div>
+
+          <p style="color:#4b5563;line-height:1.7;margin-top:0;">
+            Este mockup presenta la idea general del sistema: gestión de docentes,
+            turnos, incidentes, sugerencia de reemplazos y un mapa de calor más visual
+            para apoyar la toma de decisiones.
+          </p>
+
+          <div class="calendar">
+            <div class="day-col">
+              <h4>Patio Central</h4>
+              <div class="event">08:00 - 10:00<br><strong>Laura Gómez</strong></div>
+              <div class="event">10:00 - 12:00<br><strong>Carlos Rojas</strong></div>
+            </div>
+            <div class="day-col">
+              <h4>Biblioteca</h4>
+              <div class="event">08:00 - 10:00<br><strong>Sofía Martínez</strong></div>
+            </div>
+            <div class="day-col">
+              <h4>Laboratorios</h4>
+              <div class="event">12:00 - 14:00<br><strong>Andrés López</strong></div>
+            </div>
+            <div class="day-col">
+              <h4>Cafetería</h4>
+              <div class="event">08:00 - 10:00<br><strong>Paula Castro</strong></div>
+            </div>
+            <div class="day-col">
+              <h4>Entrada Principal</h4>
+              <div class="event">10:00 - 12:00<br><strong>Daniela Ramírez</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="docentes" class="screen">
+        <div class="toolbar">
+          <h2>Listado de docentes</h2>
+          <div>
+            <button class="btn btn-success" type="button">Nuevo docente</button>
+            <button class="btn btn-light" type="button">Exportar</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Carga</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Laura Gómez</td>
+                <td>laura.gomez@javeriana.edu.co</td>
+                <td>2</td>
+                <td><span class="pill pill-ok">Activo</span></td>
+                <td>Ver · Editar · Eliminar</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Carlos Rojas</td>
+                <td>carlos.rojas@javeriana.edu.co</td>
+                <td>1</td>
+                <td><span class="pill pill-ok">Activo</span></td>
+                <td>Ver · Editar · Eliminar</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Sofía Martínez</td>
+                <td>sofia.martinez@javeriana.edu.co</td>
+                <td>3</td>
+                <td><span class="pill pill-warn">Alta carga</span></td>
+                <td>Ver · Editar · Eliminar</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Andrés López</td>
+                <td>andres.lopez@javeriana.edu.co</td>
+                <td>0</td>
+                <td><span class="pill pill-ok">Disponible</span></td>
+                <td>Ver · Editar · Eliminar</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="turnos" class="screen">
+        <div class="toolbar">
+          <h2>Calendario simplificado de turnos</h2>
+          <button class="btn btn-primary" type="button">Crear turno</button>
+        </div>
+
+        <div class="calendar">
+          <div class="day-col">
+            <h4>Lunes</h4>
+            <div class="event">08:00 - 10:00<br><strong>Patio Central</strong><br>Laura Gómez</div>
+            <div class="event">10:00 - 12:00<br><strong>Biblioteca</strong><br>Carlos Rojas</div>
+          </div>
+          <div class="day-col">
+            <h4>Martes</h4>
+            <div class="event">08:00 - 10:00<br><strong>Laboratorios</strong><br>Sofía Martínez</div>
+            <div class="event">12:00 - 14:00<br><strong>Cafetería</strong><br>Paula Castro</div>
+          </div>
+          <div class="day-col">
+            <h4>Miércoles</h4>
+            <div class="event">10:00 - 12:00<br><strong>Entrada Principal</strong><br>Daniela Ramírez</div>
+          </div>
+          <div class="day-col">
+            <h4>Jueves</h4>
+            <div class="event">08:00 - 10:00<br><strong>Auditorio</strong><br>Miguel Herrera</div>
+          </div>
+          <div class="day-col">
+            <h4>Viernes</h4>
+            <div class="event">10:00 - 12:00<br><strong>Capilla</strong><br>Camila Suárez</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="incidente" class="screen">
+        <div class="toolbar">
+          <h2>Formulario de registro de incidente</h2>
+          <button class="btn btn-light" type="button">Guardar borrador</button>
+        </div>
+
+        <div class="panel">
+          <div class="form-grid">
+            <div class="field">
+              <label>Fecha y hora</label>
+              <input type="datetime-local" value="2026-03-17T09:30">
+            </div>
+
+            <div class="field">
+              <label>Tipo de incidente</label>
+              <select>
+                <option>SEGURIDAD</option>
+                <option>INFRAESTRUCTURA</option>
+                <option>ACCIDENTE</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Severidad</label>
+              <select>
+                <option>MEDIA</option>
+                <option>BAJA</option>
+                <option>ALTA</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Zona</label>
+              <select>
+                <option>Biblioteca</option>
+                <option>Patio Central</option>
+                <option>Laboratorios</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Docente que reporta</label>
+              <select>
+                <option>Laura Gómez</option>
+                <option>Carlos Rojas</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Turno asociado</label>
+              <select>
+                <option>#12 - 17/03/2026 - 08:00</option>
+                <option>#13 - 17/03/2026 - 10:00</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Descripción</label>
+              <textarea>Se detectó una aglomeración no habitual cerca del acceso de biblioteca y se realizó acompañamiento preventivo.</textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-success" type="button">Registrar incidente</button>
+            <button class="btn btn-primary" type="button">Limpiar</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="reemplazo" class="screen">
+        <div class="toolbar">
+          <h2>Sugerencia de reemplazo</h2>
+          <button class="btn btn-primary" type="button">Solicitar reemplazo</button>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <strong>Turno original:</strong> 17/03/2026 · 10:00 - 12:00 · Biblioteca · Carlos Rojas
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Docente</th>
+                <th>Correo</th>
+                <th>Carga actual</th>
+                <th>Disponibilidad</th>
+                <th>Criterio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Andrés López</td>
+                <td>andres.lopez@javeriana.edu.co</td>
+                <td>0</td>
+                <td><span class="pill pill-ok">Sí</span></td>
+                <td>Menor carga y sin cruce horario</td>
+              </tr>
+              <tr>
+                <td>Valentina Ortega</td>
+                <td>valentina.ortega@javeriana.edu.co</td>
+                <td>1</td>
+                <td><span class="pill pill-ok">Sí</span></td>
+                <td>Disponible en franja</td>
+              </tr>
+              <tr>
+                <td>Sofía Martínez</td>
+                <td>sofia.martinez@javeriana.edu.co</td>
+                <td>3</td>
+                <td><span class="pill pill-danger">No</span></td>
+                <td>Ya tiene turno asignado</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="heatmap" class="screen">
+        <div class="toolbar">
+          <h2>Mapa de calor por zona</h2>
+          <button class="btn btn-light" type="button">Cambiar periodo</button>
+        </div>
+
+        <div class="heatmap-container">
+          <div class="heatmap-header">
+            <div>
+              <h3>Visualización de incidentes por sector</h3>
+              <p>Representación visual del porcentaje y nivel de criticidad por zona.</p>
+            </div>
+
+            <div class="legend">
+              <div class="legend-item">
+                <span class="legend-color low"></span>
+                Riesgo bajo
+              </div>
+              <div class="legend-item">
+                <span class="legend-color medium"></span>
+                Riesgo medio
+              </div>
+              <div class="legend-item">
+                <span class="legend-color high"></span>
+                Riesgo alto
+              </div>
+            </div>
+          </div>
+
+          <div class="zones-grid">
+            <div class="zone-card low">
+              <div class="zone-name">Biblioteca</div>
+              <div class="zone-level">BAJO</div>
+              <div class="zone-metric">2</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>10%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:10%;"></div>
+              </div>
+            </div>
+
+            <div class="zone-card medium">
+              <div class="zone-name">Patio Central</div>
+              <div class="zone-level">MEDIO</div>
+              <div class="zone-metric">6</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>35%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:35%;"></div>
+              </div>
+            </div>
+
+            <div class="zone-card high">
+              <div class="zone-name">Entrada Principal</div>
+              <div class="zone-level">ALTO</div>
+              <div class="zone-metric">9</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>60%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:60%;"></div>
+              </div>
+            </div>
+
+            <div class="zone-card medium">
+              <div class="zone-name">Cafetería</div>
+              <div class="zone-level">MEDIO</div>
+              <div class="zone-metric">5</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>28%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:28%;"></div>
+              </div>
+            </div>
+
+            <div class="zone-card low">
+              <div class="zone-name">Auditorio</div>
+              <div class="zone-level">BAJO</div>
+              <div class="zone-metric">1</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>5%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:5%;"></div>
+              </div>
+            </div>
+
+            <div class="zone-card high">
+              <div class="zone-name">Laboratorios</div>
+              <div class="zone-level">ALTO</div>
+              <div class="zone-metric">8</div>
+              <div class="zone-subtext">incidentes registrados</div>
+              <div class="progress-label">
+                <span>Porcentaje</span>
+                <span>52%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:52%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer-note">
+            Este mapa de calor conserva la lógica del reporte por zona, pero la presenta de forma más clara y atractiva visualmente mediante tarjetas, colores y barras de porcentaje.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.nav-btn');
+    const screens = document.querySelectorAll('.screen');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        screens.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.screen).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <div class="card">
+        <h2 th:text="${titulo}">Recurso no encontrado</h2>
+        <p th:text="${mensaje}">No se encontró el recurso solicitado.</p>
+        <p th:text="${detalle}">El recurso no existe o ya no está disponible.</p>
+
+        <a class="btn btn-primary" th:href="@{/}">Ir al inicio</a>
+    </div>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

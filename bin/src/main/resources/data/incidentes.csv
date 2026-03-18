@@ -1,0 +1,11 @@
+fechaHora,tipoIncidente,severidad,descripcion,nombreZona,correoDocente
+2026-10-10T08:35,SEGURIDAD,MEDIA,Se detectó aglomeración inusual en el acceso principal,Entrada Principal,paula.castro@javeriana.edu.co
+2026-10-10T09:10,INFRAESTRUCTURA,BAJA,Se reportó una silla en mal estado en la zona de cafetería,Cafeteria,andres.lopez@javeriana.edu.co
+2026-10-10T10:45,FALLA_TECNICA,MEDIA,Se presentó una falla en iluminación del corredor de laboratorios,Laboratorios,sofia.martinez@javeriana.edu.co
+2026-10-10T12:20,ACCIDENTE,ALTA,Estudiante resbaló cerca de la entrada de biblioteca,Biblioteca,carlos.rojas@javeriana.edu.co
+2026-10-10T13:05,OTRO,BAJA,Se encontró un objeto perdido en patio central,Patio Central,laura.gomez@javeriana.edu.co
+2026-10-11T08:15,SEGURIDAD,MEDIA,Ingreso no autorizado reportado en parqueadero,Parqueadero,juan.parra@javeriana.edu.co
+2026-10-11T09:40,EMERGENCIA_MEDICA,CRITICA,Se requirió atención médica inmediata en canchas,Canchas,daniela.ramirez@javeriana.edu.co
+2026-10-11T10:30,INFRAESTRUCTURA,BAJA,Puerta de acceso al auditorio con cierre defectuoso,Auditorio,valentina.ortega@javeriana.edu.co
+2026-10-11T11:50,FALLA_TECNICA,MEDIA,Falla en punto de energía cercano a oficinas administrativas,Pasillo Administrativo,miguel.herrera@javeriana.edu.co
+2026-10-11T12:25,OTRO,BAJA,Ruido excesivo reportado cerca de capilla,Capilla,camila.suarez@javeriana.edu.co

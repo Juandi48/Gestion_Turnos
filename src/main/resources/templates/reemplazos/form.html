@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Formulario Reemplazo</h2>
+
+    <div class="form-container">
+        <form th:action="@{/reemplazos/guardar}" th:object="${reemplazo}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label>Fecha de solicitud</label>
+                <input type="datetime-local" th:field="*{fechaSolicitud}">
+            </div>
+
+            <div class="form-group">
+                <label>Motivo</label>
+                <textarea th:field="*{motivo}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option th:each="estado : ${estados}"
+                            th:value="${estado}"
+                            th:text="${estado.descripcion}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Turno original</label>
+                <select th:field="*{turnoOriginal}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="turno : ${turnos}"
+                            th:value="${turno.id}"
+                            th:text="${turno.id + ' - ' + turno.fecha}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Docente original</label>
+                <select th:field="*{docenteOriginal}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="docente : ${docentes}"
+                            th:value="${docente.id}"
+                            th:text="${docente.nombreCompleto}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Docente reemplazo</label>
+                <select th:field="*{docenteReemplazo}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="docente : ${docentes}"
+                            th:value="${docente.id}"
+                            th:text="${docente.nombreCompleto}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-primary" th:href="@{/reemplazos}">Volver</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

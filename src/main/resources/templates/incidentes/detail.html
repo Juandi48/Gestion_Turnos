@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Detalle Incidente</h2>
+
+    <div class="card">
+        <p><strong>ID:</strong> <span th:text="${incidente.id}"></span></p>
+        <p><strong>Fecha/Hora:</strong> <span th:text="${incidente.fechaHora}"></span></p>
+        <p><strong>Tipo:</strong> <span th:text="${incidente.tipoIncidente != null ? incidente.tipoIncidente.descripcion : 'Sin tipo'}"></span></p>
+        <p><strong>Severidad:</strong> <span th:text="${incidente.severidad != null ? incidente.severidad.descripcion : 'Sin severidad'}"></span></p>
+        <p><strong>Descripción:</strong> <span th:text="${incidente.descripcion}"></span></p>
+        <p><strong>Zona:</strong> <span th:text="${incidente.zona != null ? incidente.zona.nombre : 'Sin zona'}"></span></p>
+        <p><strong>Turno:</strong> <span th:text="${incidente.turno != null ? incidente.turno.id : 'Sin turno'}"></span></p>
+        <p><strong>Docente:</strong> <span th:text="${incidente.docenteReporta != null ? incidente.docenteReporta.nombreCompleto : 'Sin docente'}"></span></p>
+        <a class="btn btn-primary" th:href="@{/incidentes}">Volver</a>
+    </div>
+</main>
+</body>
+</html>

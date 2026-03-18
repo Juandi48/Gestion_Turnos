@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Formulario Incidente</h2>
+
+    <div class="form-container">
+        <form th:action="@{/incidentes/guardar}" th:object="${incidente}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label>Fecha y hora</label>
+                <input type="datetime-local" th:field="*{fechaHora}">
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de incidente</label>
+                <select th:field="*{tipoIncidente}">
+                    <option th:each="tipo : ${tiposIncidente}"
+                            th:value="${tipo}"
+                            th:text="${tipo.descripcion}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Severidad</label>
+                <select th:field="*{severidad}">
+                    <option th:each="sev : ${severidades}"
+                            th:value="${sev}"
+                            th:text="${sev.descripcion}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción</label>
+                <textarea th:field="*{descripcion}"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Zona</label>
+                <select th:field="*{zona}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="zona : ${zonas}"
+                            th:value="${zona.id}"
+                            th:text="${zona.nombre}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Turno</label>
+                <select th:field="*{turno}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="turno : ${turnos}"
+                            th:value="${turno.id}"
+                            th:text="${turno.id + ' - ' + turno.fecha}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Docente que reporta</label>
+                <select th:field="*{docenteReporta}">
+                    <option value="">Seleccione...</option>
+                    <option th:each="docente : ${docentes}"
+                            th:value="${docente.id}"
+                            th:text="${docente.nombreCompleto}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-primary" th:href="@{/incidentes}">Volver</a>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

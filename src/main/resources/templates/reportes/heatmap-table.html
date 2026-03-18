@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Mapa de Calor por Zona</h2>
+
+    <div class="table-container">
+        <table class="heatmap-table">
+            <thead>
+            <tr>
+                <th>Zona</th>
+                <th>Cantidad de incidentes</th>
+                <th>Porcentaje</th>
+                <th>Criticidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${heatmapZonas}"
+                th:classappend="${item.nivelCriticidad == 'ALTO'} ? 'heat-high' :
+                                (${item.nivelCriticidad == 'MEDIO'} ? 'heat-medium' : 'heat-low')">
+                <td th:text="${item.nombreZona}"></td>
+                <td th:text="${item.cantidadIncidentes}"></td>
+                <td th:text="${#numbers.formatDecimal(item.porcentajeIncidentes, 1, 2)} + '%'"></td>
+                <td th:text="${item.nivelCriticidad}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>

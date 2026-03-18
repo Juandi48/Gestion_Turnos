@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head(${titulo})}"></head>
+<body>
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+<main class="content">
+    <h2 th:text="${titulo}">Listado de Reemplazos</h2>
+
+    <div class="table-container">
+        <a class="btn btn-primary" th:href="@{/reemplazos/nuevo}">Nuevo reemplazo</a>
+        <br><br>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fecha solicitud</th>
+                <th>Motivo</th>
+                <th>Estado</th>
+                <th>Turno</th>
+                <th>Docente original</th>
+                <th>Docente reemplazo</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reemplazo : ${reemplazos}">
+                <td th:text="${reemplazo.id}"></td>
+                <td th:text="${reemplazo.fechaSolicitud}"></td>
+                <td th:text="${reemplazo.motivo}"></td>
+                <td th:text="${reemplazo.estado != null ? reemplazo.estado.descripcion : 'Sin estado'}"></td>
+                <td th:text="${reemplazo.turnoOriginal != null ? reemplazo.turnoOriginal.id : 'Sin turno'}"></td>
+                <td th:text="${reemplazo.docenteOriginal != null ? reemplazo.docenteOriginal.nombreCompleto : 'Sin docente'}"></td>
+                <td th:text="${reemplazo.docenteReemplazo != null ? reemplazo.docenteReemplazo.nombreCompleto : 'No asignado'}"></td>
+                <td class="actions">
+                    <a class="btn btn-primary" th:href="@{'/reemplazos/editar/' + ${reemplazo.id}}">Editar</a>
+                    <a class="btn btn-success" th:href="@{'/reemplazos/sugerencias/' + ${reemplazo.turnoOriginal.id}}">Sugerencias</a>
+                    <a class="btn btn-danger"
+                       th:href="@{'/reemplazos/eliminar/' + ${reemplazo.id}}"
+                       onclick="return confirmarEliminar();">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+</body>
+</html>
